@@ -1,11 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import TheamBtn from './TheamButton';
-import { useSelector } from 'react-redux';
-import { Link, Outlet } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { setCleanUser } from '@/redux/User';
+import { store } from '@/redux/Store';
+import { Type } from 'lucide-react';
 
 function Navbar() {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
   const userDetails = useSelector(state => state?.user).user
   console.log(userDetails, '==user');
+
+  useEffect(() => {
+    if (!userDetails) {
+      navigate('/login');
+    }
+  }, [userDetails]);
+
+  const handleLogout = () => {
+    dispatch(setCleanUser({ type: 'logout' }));
+    navigate('/login')
+  };
+
   return (
     <div>
       <div className='flex justify-around w-[100vw] h-16 align-middle bg-card bg-opacity-35'>
@@ -25,7 +43,7 @@ function Navbar() {
               <span className='m-auto'>
                 <Link to='/profile'>Profile</Link>
               </span>
-              <span className='m-auto'>
+              <span onClick={handleLogout} className='m-auto'>
                 <Link>Logout</Link>
               </span>
             </>
