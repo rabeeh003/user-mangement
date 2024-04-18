@@ -1,19 +1,22 @@
 import { useSelector } from 'react-redux'
 import Navbar from './components/Navbar'
 import { BrowserRouter, Navigate, Route, Routes, useNavigate } from 'react-router-dom'
-import { SignIn } from './pages/admin'
+import { Dashboard, SignIn } from './pages/admin'
 import './App.css'
 import { Home, Profile, Login, Register } from './pages/user'
+import AdminNav from './components/AdminNav'
+import { useEffect } from 'react'
 
 function App() {
   const them = useSelector(state => state.them.currentThem)
   const user = useSelector(state => state?.user)?.user
+  const admin = useSelector(state => state?.admin)?.admin
 
-  const PrivateRoute = ({ children, ...rest }) => {
-    if (user) {
-      return children
+  const AdminRoute = ({ children, ...rest }) => {
+    if (admin) {
+      return <Navigate to={"/admin"}></Navigate>
     } else {
-      return <Navigate to={"/login"}></Navigate>
+      return children
     }
   }
 
@@ -31,10 +34,13 @@ function App() {
         <Routes>
           <Route path='/login' element={<LoginRoute><Login /></LoginRoute>} />
           <Route path='/register' element={<LoginRoute><Register /></LoginRoute>} />
-          <Route path='/admin-login' element={<SignIn />} />
+          <Route path='/admin-login' element={<AdminRoute><SignIn /></AdminRoute>} />
           <Route path='/' element={<Navbar />} >
             <Route index element={<Home />} />
             <Route path='profile' element={<Profile />} />
+          </Route>
+          <Route path='/admin' element={<AdminNav />}>
+            <Route index element={<Dashboard />} />
           </Route>
         </Routes>
       </BrowserRouter>

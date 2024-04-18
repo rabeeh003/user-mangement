@@ -41,6 +41,8 @@ function Profile() {
       data.append("profile", profile)
       // Axios.put(BaseUrl + `profile/${user}`, data).then(res)
       dispatch(updateProfile({user, profile:data}))
+      setProfile('')
+      setProfileImageURL('')
     }
   }
   return (
@@ -58,6 +60,10 @@ function Profile() {
       <div className='text-left pt-4 max-w-sm m-auto'>
         <span className='mt-4'>Name</span>
         <h4 className='text-md border rounded-md px-5 py-2 bg-card'>{userDetails?.name}</h4>
+      </div>
+      <div className='text-left pt-4 max-w-sm m-auto'>
+        <span className='mt-4'>Username</span>
+        <h4 className='text-md border rounded-md px-5 py-2 bg-card'>{userDetails?.username}</h4>
       </div>
       <div className='text-left pt-4 max-w-sm m-auto'>
         <span>Email</span>

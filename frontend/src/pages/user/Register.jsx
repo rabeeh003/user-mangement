@@ -9,12 +9,13 @@ import { BaseUrl } from '@/components/const/urls';
 function Register() {
   const navigate = useNavigate()
   const [profile, setProfile] = useState('')
-  const [profileImageURL, setProfileImageURL] = useState('');
+  const [profileImageURL, setProfileImageURL] = useState('')
   const [username, setUserName] = useState('')
   const [first_name, setFirstName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const loggedInUser = useSelector(state => state.user.user);
+  const loggedInUser = useSelector(state => state.user.user)
+  const [err,setErr] =useState()
 
   const handleFileChange = (e) => {
     const file = e.target.files[0]
@@ -35,6 +36,7 @@ function Register() {
   }, [loggedInUser]);
 
   const signUp = () => {
+    if (username && email && first_name && password && profile){
     const data = { username, email, first_name, password };
     axios.post(BaseUrl + 'signup/', data)
       .then(res => {
@@ -50,6 +52,9 @@ function Register() {
           .catch(err => console.log("profile error:", err));
       })
       .catch(err => console.log("signUp error:", err));
+    } else{
+      setErr('All fields are required !')
+    }
   };
 
   return (
@@ -58,7 +63,7 @@ function Register() {
         <div className="w-full bg-card rounded shadow-lg p-8 m-4 md:max-w-sm md:mx-auto">
           <span className="block w-full text-xl uppercase font-bold mb-4">Register</span>
           <div className='max-w-sm m-auto'>
-            <img width={100} src={profileImageURL ? profileImageURL : "https://cdn-icons-png.flaticon.com/512/3177/3177440.png"} className='rounded-full m-auto pb-4' alt="" />
+            <img src={profileImageURL ? profileImageURL : "https://cdn-icons-png.flaticon.com/512/3177/3177440.png"} className='rounded-full h-[100px] w-[100px] object-cover m-auto' alt="" />
             <Label >Profile picture</Label>
             <Input id="picture" onChange={handleFileChange} type="file" />
           </div>
@@ -78,10 +83,11 @@ function Register() {
             <label className="block text-xs mb-1">Password</label>
             <input onChange={(e) => setPassword(e.target.value)} className="w-full text-black border rounded p-2 outline-none focus:shadow-outline" type="password" name="password" id="password" placeholder="Password" />
           </div>
-          <button onClick={signUp} className="bg-green-500 hover:bg-green-700 text-white uppercase text-sm font-semibold px-4 py-2 rounded">Register</button>
+          {err && <p className='text-center text-sm my-2 text-red-600'>{err}</p>}
+          <button onClick={signUp} className="bg-green-500 hover:bg-green-700 text-white uppercase text-sm font-semibold px-4 py-2 my-3 rounded">Register</button>
           <br />
           <span>I have already account. </span>
-          <Link className="text-blue-700 text-center text-sm" to="/login">Login</Link>
+          <Link className="text-blue-700 text-center  text-sm" to="/login">Login</Link>
         </div>
       </div>
     </div>
