@@ -176,26 +176,26 @@ export function UserTable({ users, getData }) {
             {editModalContent && (
                 <div className={`h-[90vh] w-[100vw] top-0 right-0 bg-gray-500 bg-opacity-80 absolute flex justify-center items-center`}>
                     <div className='w-[80%] md:max-w-[500px] p-3 rounded-sm bg-card flex-col'>
-                        <div className='bg-white border-b flex justify-between'>
-                            <span>Edit</span>
+                        <div className='bg-background border-b px-2 py-2 flex justify-between'>
+                            <span className='text-xl font-semibold'>Edit</span>
                             <button onClick={() => setEditModalContent('')} className='font-mono text-xl font-semibold'>X</button>
                         </div>
                         <div>
                             <span>Name</span>
                             <br />
-                            <input onChange={(e) => setFirst_name(e.target.value)} className='bg-gray-300 rounded-sm py-2 px-2' type="text" value={first_name} />
+                            <input onChange={(e) => setFirst_name(e.target.value)} className='bg-gray-300 text-black rounded-sm py-2 px-2' type="text" value={first_name} />
                         </div>
                         <div>
                             <span>Username</span>
                             <br />
-                            <input onChange={(e) => setUsername(e.target.value)} className='bg-gray-300 rounded-sm py-2 px-2' type="text" value={username} />
+                            <input onChange={(e) => setUsername(e.target.value)} className='bg-gray-300 text-black rounded-sm py-2 px-2' type="text" value={username} />
                         </div>
                         <div>
                             <span>Email</span>
                             <br />
-                            <input onChange={(e) => setEmail(e.target.value)} className='bg-gray-300 rounded-sm py-2 px-2' type="text" value={email} />
+                            <input onChange={(e) => setEmail(e.target.value)} className='bg-gray-300 text-black rounded-sm py-2 px-2' type="text" value={email} />
                         </div>
-                        <div className='bg-white border-t mt-3 pt-2'>
+                        <div className='bg-background border-t mt-3 pt-2'>
                             <button onClick={() => updateUser()} className='m-auto bg-blue-500 font-md rounded-sm text-white px-4 py-1'>Edit</button>
                         </div>
                     </div>
@@ -204,12 +204,12 @@ export function UserTable({ users, getData }) {
             {deleteUser && (
                 <div className={`h-[90vh] w-[100vw] top-0 right-0 bg-gray-500 bg-opacity-80 absolute flex justify-center items-center`}>
                     <div className='w-[80%] md:max-w-[500px] p-3 rounded-sm bg-card flex-col'>
-                        <div className='bg-white border-b flex justify-between'>
-                            <span>Delete</span>
+                        <div className='bg-background border-b flex justify-between'>
+                            <span className='text-xl font-semibold'>Delete</span>
                             <button onClick={() => setDeleteUser('')} className='font-mono text-xl font-semibold'>X</button>
                         </div>
                         <p className='mt-3'>Are you sure you want to delete this Delete User?</p>
-                        <div className='bg-white border-t mt-3 pt-2'>
+                        <div className='bg-background border-t mt-3 px-2 py-2'>
                             <button onClick={() => setDeleteUser()} className='m-auto bg-gray-400 font-md rounded-sm text-white px-4 py-1 mx-2'>Cancel</button>
                             <button onClick={() => deleteUserFun()} className='m-auto bg-red-800 font-md rounded-sm text-white px-4 py-1 mx-2'>Delete</button>
                         </div>
@@ -219,8 +219,8 @@ export function UserTable({ users, getData }) {
             {addUserBtn && (
                 <div className={`h-[90vh] w-[100vw] top-0 right-0 bg-gray-500 bg-opacity-80 absolute flex justify-center items-center`}>
                     <div className='w-[80%] md:max-w-[500px] p-3 rounded-sm bg-card flex-col'>
-                        <div className='bg-white border-b flex justify-between'>
-                            <span>Register</span>
+                        <div className='bg-background px-2 py-2 border-b flex justify-between'>
+                            <span className='text-xl font-semibold'>Register</span>
                             <button onClick={() => setAddUserBtn('')} className='font-mono text-xl font-semibold'>X</button>
                         </div>
                         <div className='max-w-sm m-auto'>
@@ -247,7 +247,7 @@ export function UserTable({ users, getData }) {
                             </div>
                         </div>
                         {err && <p className='text-center text-red-600'>{err}</p>}
-                        <div className='bg-white border-t mt-3 pt-2'>
+                        <div className='bg-background border-t mt-3 px-2 py-2'>
                             <button onClick={() => addUser()} className='m-auto bg-blue-500 font-md rounded-sm text-white px-4 py-1 mx-2'>Add User</button>
                         </div>
                     </div>
